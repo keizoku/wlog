@@ -1,12 +1,12 @@
- Routes
-  2 # This file defines all application routes (Higher priority routes first)
-  3 # ~~~~
-  4 
-  5 # Home page
-  6 GET     /                           controllers.Application.index
-  7 
-  8 # Map static resources from the /public folder to the /assets URL path
-  9 GET     /assets/*file               controllers.Assets.at(path="/public", file)
- 10 
- 11 GET     /reverse                    controllers.Application.reverse(key1: String)
+#Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+ 
+# Home page
+GET     /                           controllers.Application.index
+ 
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+ 
+GET     /reverse                    controllers.Application.reverse(key1: String)
 

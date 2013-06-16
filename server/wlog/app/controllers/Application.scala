@@ -2,6 +2,11 @@ package controllers
 
 import play.api._
 import play.api.mvc._
+import play.api.libs.json.Json
+
+import anorm.NotAssigned
+
+import models.Log
 
 object Application extends Controller {
   
@@ -10,10 +15,12 @@ object Application extends Controller {
   }
 
   def reverse(value: String) = Action {
-      import play.api.libs.json.Json
-  
+
       val success = Map("value1" -> value.reverse)
       val json = Json.toJson(success)
+
+	  // DBにvalue1を保存
+	  Log.insert(Log(NotAssigned, value))
   
       Ok(json).as(JSON)
   }

@@ -20,7 +20,7 @@ object Application extends Controller {
       val json = Json.toJson(success)
 
 	  // DBにvalue1を保存
-	  Log.insert(Log(NotAssigned, value))
+	  Log.insert(Log(NotAssigned, value.reverse))
   
       Ok(json).as(JSON)
   }

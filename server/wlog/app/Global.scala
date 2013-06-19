@@ -10,9 +10,9 @@ object Global extends GlobalSettings {
   override def onStart(app: Application) {
     Logger.info("Application has started")
 
-    Database.forURL("jdbc:postgresql:wlog", driver = "org.postgresql.Driver") withSession {
+    Database.forURL("jdbc:postgresql:wlog", driver = "org.postgresql.Driver",user="postgres",password="postgres") withSession {
 
-      Records.ddl.create
+      //Records.ddl.create
 
     }
 

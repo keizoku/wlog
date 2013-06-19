@@ -12,6 +12,7 @@ object ApplicationBuild extends Build {
     jdbc,
     anorm,
 	//"org.squeryl" %% "squeryl" % "0.9.5-2",
+	"com.typesafe" % "slick_2.10.0-RC1" % "0.11.2",
 	"postgresql" % "postgresql" % "9.1-901.jdbc4"
   )
 

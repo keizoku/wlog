@@ -6,7 +6,7 @@ import play.api.libs.json.Json
 
 import anorm.NotAssigned
 
-import models.Log
+import models._
 
 object Application extends Controller {
   
@@ -21,6 +21,7 @@ object Application extends Controller {
 
 	  // DBにvalue1を保存
 	  Log.insert(Log(NotAssigned, value.reverse))
+	  Records.create(value.reverse)
   
       Ok(json).as(JSON)
   }

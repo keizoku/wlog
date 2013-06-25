@@ -3,6 +3,8 @@ package models
 import scala.slick.driver.PostgresDriver.simple._
 import Database.threadLocalSession
 
+import models._
+
 case class Record(id: Long, value: String)
 
 object Records extends Table[Record]("record") {
@@ -16,12 +18,23 @@ object Records extends Table[Record]("record") {
     Query(Records).sortBy(_.id).list
   }
 
+  def allId(): List[Long] = connectDB {
+    //Query(Records).sortBy(_.id).list
+	(
+		for (r <- Records) yield (r.id)
+	).list
+  }
+
   def create(value: String) = connectDB {
     Records.ins.insert(value)
   }
 
   def delete(id: Long) = connectDB {
     Records.where(_.id === id).delete
+  }
+
+  def findBy(id: Long): List[Record] = connectDB {
+    Query(Records).where(_.id === id).list
   }
 
   def connectDB[Any](f: => Any): Any = {

@@ -1,0 +1,22 @@
+@(records: List[Record])
+
+@main(Messages("application.name")) {
+反転したい文字を入力して下さい。
+	<form method=GET action=/reverse?key1=key1> 
+		<input name=key1 type=text></input>
+		<button type="submit">送信</button>
+	</form>
+<br>
+	<table border=1>
+		<tr>
+			<th>id</th>
+			<th>value</th>
+		</tr>
+    @for(record <- records) {
+		<tr>
+			<td>@record.id</td>
+			<td>@record.value</td>
+		</tr>
+    }
+	</table>
+}

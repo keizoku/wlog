@@ -13,3 +13,5 @@ GET     /reverse                    controllers.Application.reverse(key1: String
 GET     /records                    controllers.RecordsController.list
 
 GET     /records/:id                controllers.RecordsController.details(id: Long)
+
+PUT		/records/:id				controllers.RecordsController.save(id: Long)

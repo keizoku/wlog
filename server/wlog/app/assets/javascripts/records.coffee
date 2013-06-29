@@ -4,7 +4,7 @@ jQuery ($) ->
    $table = $('.container table')
    productListUrl = $table.data('list')
 
-   # Load one column of EAN codes
+   # Load one column of id
    loadProductTable = ->
       $.get productListUrl, (records) ->
          $.each records, (index, id) ->
@@ -13,7 +13,7 @@ jQuery ($) ->
             $table.append row
             loadProductDetails row
 
-   # Construct a URL by replacing the EAN code parameter
+   # Construct a URL by replacing the id parameter
    productDetailsUrl = (id) ->
       $table.data('details').replace '0', id
 
@@ -22,6 +22,7 @@ jQuery ($) ->
       id = tableRow.text()
       $.get productDetailsUrl(id), (record) ->
          tableRow.append $('<td/>').text(record.value)
+         tableRow.append $('<td/>')
 
    loadProductTable()
 

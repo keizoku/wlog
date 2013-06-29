@@ -15,20 +15,34 @@ object RecordsController extends Controller {
 	Ok(Json.toJson(records))
   }
 
-  def listAll = Action { implicit request =>
-
-    val records = Records.all() 
-	Ok(Json.toJson(records))
-  }
-
   def details(id: Long) = Action { 
 
-    val records = Records.findBy(id) 
+    val records = Records.findById(id) 
 	Ok(Json.toJson(records.apply(0)))
   }
+
+	def save(id: Long) = Action(parse.json) { request =>
+
+		val recordJson = request.body
+		val record = Json.fromJson[Record](recordJson).get
+
+		try {
+			Records.save(record)
+			Ok("Saved")
+		} catch {
+			case e:IllegalArgumentException =>
+			BadRequest("Record Not Found")
+		}
+	}
 
 	implicit val recordWrites = (
   		(__ \ "id").write[Long] and
   		(__ \ "value").write[String]
 	)(unlift(Record.unapply))
+
+	implicit val recordReads = (
+		(__ \ "id").read[Long] and
+		(__ \ "value").read[String]
+	)(Record)  
+
 }

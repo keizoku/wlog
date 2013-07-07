@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Userinfo</title>
+  <link rel='stylesheet' type='text/css'
+    href='@routes.Assets.at("stylesheets/bootstrap.css")'>
+  <link rel='stylesheet' type='text/css'
+    href='@routes.Assets.at("stylesheets/main.css")'>
+  <script src='@routes.Assets.at("javascripts/jquery-1.7.1.min.js")'
+type='text/javascript'></script>
+<script src='@routes.Assets.at("javascripts/userinfo.js")'
+    type='text/javascript'></script>
+</head>
+<body>
+<div class="screenshot">
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+          Userinfo リスト
+          <a class="brand" href="@routes.Application.user()"> 
+        </a>
+        <ul class="nav"></ul>
+      </div>
+    </div>
+  </div>
+	<div class="container">
+	  <table data-list="@routes.UserInfoController.list"
+	    data-details="@routes.UserInfoController.details("abc")">
+	  </table>
+	</div>
+</div>
+</body>
+</html>

@@ -13,6 +13,10 @@ object Application extends Controller {
   def index = Action {
     Ok(views.html.index())
   }
+  
+  def user = Action {
+    Ok(views.html.userinfo())
+  }
 
   def reverse(value: String) = Action {
 

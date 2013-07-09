@@ -15,3 +15,5 @@ GET     /records                    controllers.RecordsController.list
 GET     /records/:id                controllers.RecordsController.details(id: Long)
 
 PUT		/records/:id				controllers.RecordsController.save(id: Long)
+
+GET     /graph						controllers.Application.graph

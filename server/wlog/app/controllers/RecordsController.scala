@@ -7,6 +7,9 @@ import models.Records
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
 
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
+
 object RecordsController extends Controller {
 
   def list = Action { implicit request =>
@@ -37,12 +40,17 @@ object RecordsController extends Controller {
 
 	implicit val recordWrites = (
   		(__ \ "id").write[Long] and
-  		(__ \ "value").write[String]
+  		(__ \ "value").write[String] and
+  		(__ \ "userid").write[String] and
+  		(__ \ "ts").write[String].contramap{ (a: Timestamp) => new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(a) } and
+  		(__ \ "weight").write[Double]
 	)(unlift(Record.unapply))
 
 	implicit val recordReads = (
 		(__ \ "id").read[Long] and
-		(__ \ "value").read[String]
+		(__ \ "value").read[String] and
+		(__ \ "userid").read[String] and
+		(__ \ "ts").read[String].map{ ts => Timestamp.valueOf(ts)} and
+		(__ \ "weight").read[String].map{weight => weight.toDouble}
 	)(Record)  
-
 }

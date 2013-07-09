@@ -14,6 +14,21 @@ object Application extends Controller {
     Ok(views.html.index())
   }
 
+  def graph = Action {
+
+	var weight_data = for (r<- Records.all()) yield (r.weight)
+	var data = "data : [" + weight_data.mkString(",") + "]"
+
+	var ts_data = for (r<- Records.all()) yield (""""""" + r.ts.toString.substring(0,10) + """"""")
+	var labels = "[" + ts_data.mkString(",") + "]"
+	
+	println("data:" + data)
+	println("labels:" + labels)
+
+	val datalist: String = data
+    Ok(views.html.records.graph(datalist,labels))
+  }
+
   def reverse(value: String) = Action {
 
       val success = Map("value1" -> value.reverse)

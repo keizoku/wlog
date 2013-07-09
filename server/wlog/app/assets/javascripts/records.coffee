@@ -22,6 +22,9 @@ jQuery ($) ->
       id = tableRow.text()
       $.get productDetailsUrl(id), (record) ->
          tableRow.append $('<td/>').text(record.value)
+         tableRow.append $('<td/>').text(record.userid)
+         tableRow.append $('<td/>').text(record.ts)
+         tableRow.append $('<td/>').text(record.weight)
          tableRow.append $('<td/>')
 
    loadProductTable()
@@ -29,10 +32,13 @@ jQuery ($) ->
 
    # Save an edited table row to the server
    saveRow = ($row) ->
-      [id, value] = $row.children().map -> $(this).text()
+      [id, value, userid, ts, weight] = $row.children().map -> $(this).text()
       record =
          id: parseInt(id)
          value: value
+         userid: userid
+         ts: ts
+         weight: weight
       jqxhr = $.ajax
          type: "PUT"
          url: productDetailsUrl(id)

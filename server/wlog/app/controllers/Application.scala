@@ -14,6 +14,10 @@ object Application extends Controller {
     Ok(views.html.index())
   }
 
+  def user = Action {
+    Ok(views.html.userinfo())
+  }
+
   def graph = Action {
 
 	var weight_data = for (r<- Records.all()) yield (r.weight)

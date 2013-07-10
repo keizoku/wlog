@@ -18,12 +18,12 @@ object Application extends Controller {
     Ok(views.html.userinfo())
   }
 
-  def graph = Action {
+  def graph(userid: String) = Action {
 
-	var weight_data = for (r<- Records.all()) yield (r.weight)
+	var weight_data = for (r<- Records.findByUserid(userid)) yield (r.weight)
 	var data = "data : [" + weight_data.mkString(",") + "]"
 
-	var ts_data = for (r<- Records.all()) yield (""""""" + r.ts.toString.substring(0,10) + """"""")
+	var ts_data = for (r<- Records.findByUserid(userid)) yield (""""""" + r.ts.toString.substring(0,10) + """"""")
 	var labels = "[" + ts_data.mkString(",") + "]"
 	
 	println("data:" + data)

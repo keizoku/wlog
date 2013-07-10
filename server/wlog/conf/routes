@@ -19,10 +19,10 @@ GET     /records/:id                controllers.RecordsController.details(id: Lo
 
 PUT		/records/:id				controllers.RecordsController.save(id: Long)
 
-GET     /graph						controllers.Application.graph
+GET     /graph						controllers.Application.graph(userid: String)
 
-GET     /userinfo                    controllers.UserInfoController.list
+GET     /userinfo                   controllers.UserInfoController.list
 
-GET     /userinfo/:id                controllers.UserInfoController.details(id: String)
+GET     /userinfo/:id               controllers.UserInfoController.details(id: String)
 
 PUT		/userinfo/:id				controllers.UserInfoController.save(id: String)

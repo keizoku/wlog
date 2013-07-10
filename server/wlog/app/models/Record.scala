@@ -12,7 +12,7 @@ object Records extends Table[Record]("record") {
 
 	def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
 	def value = column[String]("value", O DBType "char(32)", O.Nullable)
-	def userid = column[String]("userid", O DBType "varchar(40)", O.Nullable)
+	def userid = column[String]("userid", O DBType "varchar(20)", O.Nullable)
 	def ts = column[Timestamp]("ts", O DBType "timestamp", O.Nullable)
 	def weight = column[Double]("weight", O DBType "double", O.Nullable)
 
@@ -21,6 +21,10 @@ object Records extends Table[Record]("record") {
 
 	def all(): List[Record] = connectDB {
 		Query(Records).sortBy(_.id).list
+	}
+
+	def findByUserid(userid: String): List[Record] = connectDB {
+		Query(Records).where(_.userid === userid).list
 	}
 
 	def allId(): List[Long] = connectDB {

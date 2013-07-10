@@ -65,7 +65,7 @@ object UserInfoTable extends Table[UserInfo]("userinfo"){
   }
   	
   def connectDB[Any](f: => Any): Any = {
-	Database.forURL("jdbc:postgresql://ec2-54-249-212-18.ap-northeast-1.compute.amazonaws.com:5432/wlog", driver = "org.postgresql.Driver",user="postgres",password="postgres") withSession {
+	Database.forURL("jdbc:postgresql://ec2-54-249-212-18.ap-northeast-1.compute.amazonaws.com:5432/wlog", driver = "org.postgresql.Driver",user="keizoku",password="keizoku") withSession {
 		f
 	}
   }

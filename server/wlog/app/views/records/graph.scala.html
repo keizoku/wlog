@@ -1,11 +1,12 @@
 @(datalist: String, labels: String)
 <html>
 <head>
-  <script src='@routes.Assets.at("javascripts/Chart.js")'
-type='text/javascript'></script>
 </head>
 <body>
-<canvas id="myChart" width="600" height="400"></canvas>
+<div data-role="page" id="graph">
+<script src='@routes.Assets.at("javascripts/Chart.js")'
+type='text/javascript'></script>
+<canvas id="myChart" width="300" height="400"></canvas>
 
 <script>
 
@@ -26,5 +27,6 @@ var ctx = document.getElementById("myChart").getContext("2d");
 var myNewChart = new Chart(ctx).Line(data);
 
 </script>
+</div>
 </body>
 </html>

@@ -1,0 +1,19 @@
+@(userid: String)
+<html>
+<head>
+  <title>メニュー</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel='stylesheet' type='text/css'
+	href='@routes.Assets.at("stylesheets/jquery.mobile-1.3.2.min.css")'>
+	<script src='@routes.Assets.at("javascripts/jquery-1.7.1.min.js")'
+	type='text/javascript'></script>
+	<script src='@routes.Assets.at("javascripts/jquery.mobile-1.3.2.min.js")'
+	type='text/javascript'></script>
+</head>
+<body>
+	<a href="#" data-role="button">体重登録</a>
+	<a href="/displayGraph?userid=@userid" data-role="button">グラフ表示</a>
+	<a href="#" data-role="button">プロフィール</a>
+</body>
+</html>

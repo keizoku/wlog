@@ -3,11 +3,16 @@
 # ~~~~
  
 # Home page
-GET     /                         controllers.Application.index
+GET     /                         	controllers.Application.index
 
-GET     /user                     controllers.Application.user
+GET     /user                     	controllers.Application.user
 
- 
+# Authentication
+GET     /login                      controllers.Application.login
+POST    /loginAction 				controllers.Application.loginAction
+
+POST	/viewWeight					controllers.Application.displayGraph(userid: String)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
  
@@ -19,7 +24,7 @@ GET     /records/:id                controllers.RecordsController.details(id: Lo
 
 PUT		/records/:id				controllers.RecordsController.save(id: Long)
 
-GET     /graph						controllers.Application.graph(userid: String)
+GET     /displayGraph				controllers.Application.displayGraph(userid: String)
 
 GET     /userinfo                   controllers.UserInfoController.list
 

@@ -24,7 +24,7 @@ object Records extends Table[Record]("record") {
 	}
 
 	def findByUserid(userid: String): List[Record] = connectDB {
-		Query(Records).where(_.userid === userid).list
+		Query(Records).where(_.userid === userid).sortBy(_.ts)list
 	}
 
 	def allId(): List[Long] = connectDB {

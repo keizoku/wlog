@@ -2,10 +2,12 @@ package controllers
 
 import play.api._
 import play.api.mvc._
+import play.api.data._
+import play.api.data.Form
+import play.api.data.Forms._
 import play.api.libs.json.Json
 
 import anorm.NotAssigned
-
 import models._
 
 object Application extends Controller {
@@ -18,7 +20,25 @@ object Application extends Controller {
     Ok(views.html.userinfo())
   }
 
-  def graph(userid: String) = Action {
+  def login = Action { implicit request =>
+    Ok(views.html.login())
+  }
+
+  def loginAction = Action { implicit request =>
+
+	val loginForm = Form(
+	  tuple(
+	    "userid" -> text,
+	    "password" -> text
+	  )
+	)
+
+	val (userid,password) = loginForm.bindFromRequest.get
+
+    Ok(views.html.menu(userid))
+  }
+
+  def displayGraph(userid: String) = Action {
 
 	var weight_data = for (r<- Records.findByUserid(userid)) yield (r.weight)
 	var data = "data : [" + weight_data.mkString(",") + "]"

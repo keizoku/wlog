@@ -40,10 +40,10 @@ object Application extends Controller {
 
   def displayGraph(userid: String) = Action {
 
-	var weight_data = for (r<- Records.findByUserid(userid)) yield (r.weight)
+	var weight_data = for (r<- Weight_logs.findByUserid(userid)) yield (r.weight)
 	var data = "data : [" + weight_data.mkString(",") + "]"
 
-	var ts_data = for (r<- Records.findByUserid(userid)) yield (""""""" + r.ts.toString.substring(0,10) + """"""")
+	var ts_data = for (r<- Weight_logs.findByUserid(userid)) yield (""""""" + r.ts.toString.substring(0,10) + """"""")
 	var labels = "[" + ts_data.mkString(",") + "]"
 	
 	println("data:" + data)

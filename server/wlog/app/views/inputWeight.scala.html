@@ -1,7 +1,8 @@
 @(userid: String)
+<!DOCTYPE html>
 <html>
 <head>
-  <title>メニュー</title>
+  <title>体重登録</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel='stylesheet' type='text/css'
@@ -12,8 +13,12 @@
 	type='text/javascript'></script>
 </head>
 <body>
-	<a href="/inputWeight?userid=@userid" data-role="button">体重登録</a>
-	<a href="/displayGraph?userid=@userid" data-role="button">グラフ表示</a>
-	<a href="#" data-role="button">プロフィール</a>
+	<div data-role="content">
+		<form action="/registWeight" method="post">
+  			<input type="text" name="weight" placeholder="体重を入力して下さい"/><br/>
+            <input type="hidden" name="userid" value="@userid"/><br/>
+            <input type="submit" value="登録！"/>
+		</form>
+	</div>
 </body>
 </html>

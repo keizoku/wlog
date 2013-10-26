@@ -38,6 +38,24 @@ object Application extends Controller {
     Ok(views.html.menu(userid))
   }
 
+  def inputWeight(userid: String) = Action { implicit request =>
+
+    Ok(views.html.inputWeight(userid))
+  }
+
+  def registWeight = Action { implicit request =>
+
+	val loginForm = Form(
+	  tuple(
+	    "userid" -> text,
+	    "weight" -> text
+	  )
+	)
+
+	val (userid,weight) = loginForm.bindFromRequest.get
+	Redirect(routes.Application.displayGraph(userid))
+  }
+
   def displayGraph(userid: String) = Action {
 
 	var weight_data = for (r<- Weight_logs.findByUserid(userid)) yield (r.weight)

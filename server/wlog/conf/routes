@@ -11,7 +11,11 @@ GET     /user                     	controllers.Application.user
 GET     /login                      controllers.Application.login
 POST    /loginAction 				controllers.Application.loginAction
 
-POST	/viewWeight					controllers.Application.displayGraph(userid: String)
+GET     /inputWeight				controllers.Application.inputWeight(userid: String)
+POST	/registWeight				controllers.Application.registWeight
+
+GET     /displayGraph				controllers.Application.displayGraph(userid: String)
+#POST	/viewWeight					controllers.Application.displayGraph(userid: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
@@ -19,15 +23,9 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /reverse                    controllers.Application.reverse(key1: String)
 
 GET     /records                    controllers.RecordsController.list
-
 GET     /records/:id                controllers.RecordsController.details(id: Long)
-
 PUT		/records/:id				controllers.RecordsController.save(id: Long)
 
-GET     /displayGraph				controllers.Application.displayGraph(userid: String)
-
 GET     /userinfo                   controllers.UserInfoController.list
-
 GET     /userinfo/:id               controllers.UserInfoController.details(id: String)
-
 PUT		/userinfo/:id				controllers.UserInfoController.save(id: String)

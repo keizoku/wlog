@@ -50,7 +50,7 @@ object Weight_logs extends Table[Weight_log]("weight_log") {
 	}
 
 	def connectDB[Any](f: => Any): Any = {
-		Database.forURL("jdbc:postgresql://ec2-54-249-212-18.ap-northeast-1.compute.amazonaws.com:5432/wlog", driver = "org.postgresql.Driver",user="postgres",password="p@ssw0rd") withSession {
+		Database.forURL("jdbc:postgresql://ec2-54-249-212-18.ap-northeast-1.compute.amazonaws.com:5432/wlog", driver = "org.postgresql.Driver",user="keizoku",password="keizoku") withSession {
 			f
 		}
 	}

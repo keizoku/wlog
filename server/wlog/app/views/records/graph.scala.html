@@ -1,4 +1,4 @@
-@(datalist: String, labels: String)
+@(datalist: String, labels: String, step: Double, min: Double)
 <html>
 <head>
 </head>
@@ -14,17 +14,42 @@ var data = {
 	labels : @{Html(labels)},
 	datasets : [
 		{
-			fillColor : "rgba(255,255,255,0)",
+			fillColor : "rgba(171,230,242,0.2)",
+			pointColor : "#fff",
 			strokeColor : "rgba(171,230,242,1)",
-			pointColor : "rgba(171,230,242,1)",
-			pointStrokeColor : "#fff",
+			pointStrokeColor : "rgba(171,230,242,1)",
 			@datalist
 		}
 	]
 }
 
+var options = {
+	//ベジエ曲線は適用しない
+	bezierCurve : false,
+
+	//点の枠線の幅
+	pointDotStrokeWidth : 2,
+	
+	//点の半径
+	pointDotRadius : 4,
+
+	scaleOverride : true,
+
+	//縦軸を何ステップ分表示するか
+	scaleSteps : @step,
+
+	//縦軸の一目盛り分の
+	scaleStepWidth : 5,
+
+	//縦軸の最低値
+	scaleStartValue : @min,
+
+	//線の太さ
+	datasetStrokeWidth : 1 
+}
+
 var ctx = document.getElementById("myChart").getContext("2d");
-var myNewChart = new Chart(ctx).Line(data);
+var myNewChart = new Chart(ctx).Line(data, options);
 
 </script>
 </div>

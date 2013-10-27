@@ -14,7 +14,7 @@ object Weight_logs extends Table[Weight_log]("weight_log") {
 	def ts = column[Timestamp]("ts", O DBType "timestamp")
 	def weight = column[Double]("weight", O DBType "double", O.Nullable)
 
-	def ins = userid returning userid
+	def ins = userid ~ ts ~ weight returning userid
 
 	def * = userid ~ ts ~ weight <> (Weight_log.apply _, Weight_log.unapply _)
 	def pk = primaryKey("pk_a", (userid, ts))
@@ -33,8 +33,8 @@ object Weight_logs extends Table[Weight_log]("weight_log") {
 	).list
 	}
 
-	def create(userid: String) = connectDB {
-		Weight_logs.ins.insert(userid)
+	def create(userid: String, weight: Double) = connectDB {
+		Weight_logs.ins.insert(userid, new Timestamp(System.currentTimeMillis), weight)
 	}
 
 	def delete(id: Long) = connectDB {
@@ -50,7 +50,7 @@ object Weight_logs extends Table[Weight_log]("weight_log") {
 	}
 
 	def connectDB[Any](f: => Any): Any = {
-		Database.forURL("jdbc:postgresql://ec2-54-249-212-18.ap-northeast-1.compute.amazonaws.com:5432/wlog", driver = "org.postgresql.Driver",user="keizoku",password="keizoku") withSession {
+		Database.forURL("jdbc:postgresql://ec2-54-249-212-18.ap-northeast-1.compute.amazonaws.com:5432/wlog", driver = "org.postgresql.Driver",user="postgres",password="p@ssw0rd") withSession {
 			f
 		}
 	}

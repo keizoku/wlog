@@ -53,6 +53,10 @@ object Application extends Controller {
 	)
 
 	val (userid,weight) = loginForm.bindFromRequest.get
+
+	// DB保存
+	Weight_logs.create(userid, weight toDouble)
+
 	Redirect(routes.Application.displayGraph(userid))
   }
 
@@ -61,14 +65,20 @@ object Application extends Controller {
 	var weight_data = for (r<- Weight_logs.findByUserid(userid)) yield (r.weight)
 	var data = "data : [" + weight_data.mkString(",") + "]"
 
-	var ts_data = for (r<- Weight_logs.findByUserid(userid)) yield (""""""" + r.ts.toString.substring(0,10) + """"""")
+	val width = 10
+	val min = weight_data.min-width
+	val max = weight_data.max+width
+	val step = 5
+
+	//var ts_data = for (r<- Weight_logs.findByUserid(userid)) yield (""""""" + r.ts.toString.substring(0,10) + """"""")
+	var ts_data = for (r<- Weight_logs.findByUserid(userid)) yield (""""""" + " " + """"""")
 	var labels = "[" + ts_data.mkString(",") + "]"
 	
 	println("data:" + data)
 	println("labels:" + labels)
 
 	val datalist: String = data
-    Ok(views.html.records.graph(datalist,labels))
+    Ok(views.html.records.graph(datalist,labels,((max-min)/step).intValue, min.intValue))
   }
 
   def reverse(value: String) = Action {

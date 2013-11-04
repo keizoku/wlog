@@ -7,7 +7,9 @@ import play.api.libs.json._
 
 import models._
 
-case class UserInfo(userid:String, name:String, address:String)
+import java.sql.Date
+
+case class UserInfo(userid:String, name:String, sex:String, mailAddress:String, birthday:Date, address:String, height:Double, targetWeight:Double)
 
 object UserInfo {
 
@@ -16,8 +18,13 @@ object UserInfo {
       for {
         userid <- (json \ "userid").validate[String]
         name <- (json \ "name").validate[String]
+        sex <- (json \ "sex").validate[String]
+        mailAddress<- (json \ "mailAddress").validate[String]
+        birthday <- (json \ "birthday").validate[Date]
         address <- (json \ "address").validate[String]
-      } yield UserInfo(userid, name, address)
+        height<- (json \ "height").validate[Double]
+        targetWeight<- (json \ "targetWeight").validate[Double]
+      } yield UserInfo(userid, name, sex, mailAddress, birthday, address, height, targetWeight)
     }
   }
 
@@ -29,8 +36,12 @@ object UserInfoTable extends Table[UserInfo]("userinfo"){
   def userid = column[String]("userid", O DBType "char(20)", O.PrimaryKey)
   
   def name = column[String]("name", O DBType "char(20)", O.NotNull)
+
+  def sex = column[String]("sex", O DBType "char(1)", O.NotNull)
   
   def mailAddress = column[String]("mail_address", O DBType "char(50)")
+
+  def birthday = column[Date]("birthday", O DBType "date")
   
   def address = column[String]("address", O DBType "char(100)", O.Nullable)
   
@@ -40,7 +51,7 @@ object UserInfoTable extends Table[UserInfo]("userinfo"){
 
   def numberOfLogin = column[Int]("number_of_login", O DBType "integer")
   
-  def * = userid ~ name ~ address <> (UserInfo.apply _, UserInfo.unapply _)
+  def * = userid ~ name ~ sex ~ mailAddress ~ birthday ~ address ~ height ~ targetWeight <> (UserInfo.apply _, UserInfo.unapply _)
   
   def ins = name returning userid
 
@@ -60,8 +71,7 @@ object UserInfoTable extends Table[UserInfo]("userinfo"){
   }
   
   def save(userinfo: UserInfo) = connectDB {
-//	  UserInfoTable.where(_.userid === userinfo.userid).map(_.name).update(userinfo.name)
-   	  UserInfoTable.where(_.userid === userinfo.userid).map( userinfo => userinfo.name ~ userinfo.address).update((userinfo.name, userinfo.address))
+   	UserInfoTable.where(_.userid === userinfo.userid).map( userinfo => userinfo.name ~ userinfo.sex ~ userinfo.mailAddress ~ userinfo.birthday ~ userinfo.address ~ userinfo.height ~ userinfo.targetWeight).update((userinfo.name, userinfo.sex, userinfo.mailAddress, userinfo.birthday, userinfo.address, userinfo.height, userinfo.targetWeight))
   }
   	
   def connectDB[Any](f: => Any): Any = {

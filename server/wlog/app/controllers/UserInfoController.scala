@@ -9,12 +9,19 @@ import play.api.libs.json.Writes._
 import play.api.libs.json.Reads._
 import play.api.Logger
 
+import java.sql.Date
+
 object UserInfoController extends Controller{
 
    implicit val recordWrites = (
   		(__ \ "userid").write[String] and
   		(__ \ "name").write[String] and
-  		(__ \ "address").write[String]  		
+  		(__ \ "sex").write[String] and
+  		(__ \ "mailAddress").write[String] and
+  		(__ \ "birthday").write[Date] and
+  		(__ \ "address").write[String] and
+  		(__ \ "height").write[Double] and
+  		(__ \ "targetWeight").write[Double]
    )(unlift(UserInfo.unapply))
 
   def list = Action{ implicit request =>

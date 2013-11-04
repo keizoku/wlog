@@ -15,7 +15,11 @@ GET     /inputWeight				controllers.Application.inputWeight(userid: String)
 POST	/registWeight				controllers.Application.registWeight
 
 GET     /displayGraph				controllers.Application.displayGraph(userid: String)
-#POST	/viewWeight					controllers.Application.displayGraph(userid: String)
+
+GET     /editProfile				controllers.Application.editProfile(userid: String)
+POST	/applyProfile				controllers.Application.applyProfile
+
+GET     /displayMenu				controllers.Application.displayMenu(userid: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

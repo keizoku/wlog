@@ -10,6 +10,8 @@ import play.api.libs.json.Json
 import anorm.NotAssigned
 import models._
 
+import java.text.SimpleDateFormat
+
 object Application extends Controller {
   
   def index = Action {
@@ -79,6 +81,50 @@ object Application extends Controller {
 
 	val datalist: String = data
     Ok(views.html.records.graph(datalist,labels,((max-min)/step).intValue, min.intValue))
+  }
+
+  def editProfile(userid: String) = Action { implicit request =>
+
+	val userinfo = UserInfoTable.findByUserId(userid).head
+
+	val df = new SimpleDateFormat("yyyy/MM/dd");  
+	val s_birthday= df.format(userinfo.birthday);  
+  
+
+    Ok(views.html.editProfile(userinfo.userid, userinfo.name, userinfo.sex, userinfo.mailAddress, s_birthday, userinfo.address, userinfo.height.toString, userinfo.targetWeight.toString))
+  }
+
+  def applyProfile = Action { implicit request =>
+
+	val loginForm = Form(
+	  tuple(
+	    "userid" -> text,
+	    "name" -> text,
+	    "sex" -> text,
+	    "mail_address" -> text,
+	    "birthday" -> text,
+	    "address" -> text,
+	    "height" -> text,
+	    "target_weight" -> text
+	  )
+	)
+
+	val (userid, name, sex, mail_address, birthday, address, height, target_weight) = loginForm.bindFromRequest.get
+
+	println("sex:" + sex)
+
+	val format = new SimpleDateFormat("yyyy/MM/dd");
+    val parsed = format.parse(birthday);
+    val date = new java.sql.Date(parsed.getTime());
+
+	val userinfo = new UserInfo(userid, name, sex, mail_address, date, address, height.toDouble, target_weight.toDouble)
+	UserInfoTable.save(userinfo)
+
+    Ok(views.html.applyProfile(userid, name, sex, mail_address, birthday, address, height, target_weight))
+  }
+
+  def displayMenu(userid: String) = Action { implicit request =>
+    Ok(views.html.menu(userid))
   }
 
   def reverse(value: String) = Action {

@@ -80,7 +80,7 @@ object Application extends Controller {
 	println("labels:" + labels)
 
 	val datalist: String = data
-    Ok(views.html.records.graph(datalist,labels,((max-min)/step).intValue, min.intValue))
+    Ok(views.html.records.graph(userid, datalist, labels,((max-min)/step).intValue, min.intValue))
   }
 
   def editProfile(userid: String) = Action { implicit request =>

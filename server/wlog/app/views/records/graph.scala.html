@@ -1,12 +1,11 @@
-@(datalist: String, labels: String, step: Double, min: Double)
+@(userid: String, datalist: String, labels: String, step: Double, min: Double)
 <html>
 <head>
 </head>
 <body>
-<div data-role="page" id="graph">
 <script src='@routes.Assets.at("javascripts/Chart.js")'
 type='text/javascript'></script>
-<canvas id="myChart" width="300" height="400"></canvas>
+<canvas id="myChart" width="300" height="350"></canvas>
 
 <script>
 
@@ -52,6 +51,8 @@ var ctx = document.getElementById("myChart").getContext("2d");
 var myNewChart = new Chart(ctx).Line(data, options);
 
 </script>
+<div data-role="content" id="graph">
+<a href="/displayMenu?userid=@userid" data-role="button">メニューへ戻る</a>
 </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-@(userid: String, name :String, sex: String, mailAddress: String, birthday: String, address: String, height: String, targetWeight: String)
+@(userid: String, name :String, sex: String, mailAddress: String, yyyy: String, mm: String, dd: String, address: String, height: String, targetWeight: String)
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,8 +36,92 @@
                 </li>
                 <li data-role="fieldcontain">
                     <label for="birthday">生年月日</label>
-  					<input type="text" name="birthday" id="birthday" value="@birthday" placeholder="例 2000/01/01"/>
+					<fieldset data-role="controlgroup" data-type="horizontal">
+                    <select name="birthday_yyyy" id="birthday">
+                        <option value="">年</option>
+                        <option value="1970" @if(yyyy=="1970") {selected} else {}>1970</option>
+                        <option value="1970" @if(yyyy=="1971") {selected} else {}>1971</option>
+                        <option value="1970" @if(yyyy=="1972") {selected} else {}>1972</option>
+                        <option value="1970" @if(yyyy=="1973") {selected} else {}>1973</option>
+                        <option value="1970" @if(yyyy=="1974") {selected} else {}>1974</option>
+                        <option value="1970" @if(yyyy=="1975") {selected} else {}>1975</option>
+                        <option value="1970" @if(yyyy=="1976") {selected} else {}>1976</option>
+                        <option value="1970" @if(yyyy=="1977") {selected} else {}>1977</option>
+                        <option value="1970" @if(yyyy=="1978") {selected} else {}>1978</option>
+                        <option value="1970" @if(yyyy=="1979") {selected} else {}>1979</option>
+                        <option value="1986" @if(yyyy=="1980") {selected} else {}>1980</option>
+                        <option value="1986" @if(yyyy=="1981") {selected} else {}>1981</option>
+                        <option value="1986" @if(yyyy=="1982") {selected} else {}>1982</option>
+                        <option value="1986" @if(yyyy=="1983") {selected} else {}>1983</option>
+                        <option value="1986" @if(yyyy=="1984") {selected} else {}>1984</option>
+                        <option value="1986" @if(yyyy=="1985") {selected} else {}>1985</option>
+                        <option value="1986" @if(yyyy=="1986") {selected} else {}>1986</option>
+                        <option value="1986" @if(yyyy=="1987") {selected} else {}>1987</option>
+                        <option value="1986" @if(yyyy=="1988") {selected} else {}>1988</option>
+                        <option value="1986" @if(yyyy=="1989") {selected} else {}>1989</option>
+                        <option value="1986" @if(yyyy=="1990") {selected} else {}>1990</option>
+                        <option value="1986" @if(yyyy=="1991") {selected} else {}>1991</option>
+                        <option value="1986" @if(yyyy=="1992") {selected} else {}>1992</option>
+                        <option value="1986" @if(yyyy=="1993") {selected} else {}>1993</option>
+                        <option value="1986" @if(yyyy=="1994") {selected} else {}>1994</option>
+                        <option value="1986" @if(yyyy=="1995") {selected} else {}>1995</option>
+                        <option value="1986" @if(yyyy=="1996") {selected} else {}>1996</option>
+                        <option value="1986" @if(yyyy=="1997") {selected} else {}>1997</option>
+                        <option value="1986" @if(yyyy=="1998") {selected} else {}>1998</option>
+                        <option value="1986" @if(yyyy=="1999") {selected} else {}>1999</option>
+                        <option value="2000" @if(yyyy=="2000") {selected} else {}>2000</option>
+                    </select>
+                    <select name="birthday_mm" id="birthday">
+                        <option value="">月</option>
+                        <option value="01" @if(mm=="01") {selected} else {}>01</option>
+                        <option value="02" @if(mm=="02") {selected} else {}>02</option>
+                        <option value="03" @if(mm=="03") {selected} else {}>03</option>
+                        <option value="04" @if(mm=="04") {selected} else {}>04</option>
+                        <option value="05" @if(mm=="05") {selected} else {}>05</option>
+                        <option value="06" @if(mm=="06") {selected} else {}>06</option>
+						<option value="07" @if(mm=="07") {selected} else {}>07</option>
+                        <option value="08" @if(mm=="08") {selected} else {}>08</option>
+                        <option value="09" @if(mm=="09") {selected} else {}>09</option>
+                        <option value="10" @if(mm=="10") {selected} else {}>10</option>
+                        <option value="11" @if(mm=="11") {selected} else {}>11</option>
+                        <option value="12" @if(mm=="12") {selected} else {}>12</option>
+                    </select>
+                    <select name="birthday_dd" id="birthday">
+                        <option value="">日</option>
+                        <option value="01" @if(dd=="01") {selected} else {}>01</option>
+                        <option value="02" @if(dd=="02") {selected} else {}>02</option>
+                        <option value="03" @if(dd=="03") {selected} else {}>03</option>
+                        <option value="04" @if(dd=="04") {selected} else {}>04</option>
+                        <option value="05" @if(dd=="05") {selected} else {}>05</option>
+                        <option value="06" @if(dd=="06") {selected} else {}>06</option>
+                        <option value="07" @if(dd=="07") {selected} else {}>07</option>
+                        <option value="08" @if(dd=="08") {selected} else {}>08</option>
+                        <option value="09" @if(dd=="09") {selected} else {}>09</option>
+                        <option value="10" @if(dd=="10") {selected} else {}>10</option>
+                        <option value="11" @if(dd=="11") {selected} else {}>11</option>
+                        <option value="12" @if(dd=="12") {selected} else {}>12</option>
+                        <option value="13" @if(dd=="13") {selected} else {}>13</option>
+                        <option value="14" @if(dd=="14") {selected} else {}>14</option>
+                        <option value="15" @if(dd=="15") {selected} else {}>15</option>
+                        <option value="16" @if(dd=="16") {selected} else {}>16</option>
+                        <option value="17" @if(dd=="17") {selected} else {}>17</option>
+                        <option value="18" @if(dd=="18") {selected} else {}>18</option>
+                        <option value="19" @if(dd=="19") {selected} else {}>19</option>
+                        <option value="20" @if(dd=="20") {selected} else {}>20</option>
+                        <option value="21" @if(dd=="21") {selected} else {}>21</option>
+                        <option value="22" @if(dd=="22") {selected} else {}>22</option>
+                        <option value="23" @if(dd=="23") {selected} else {}>23</option>
+                        <option value="24" @if(dd=="24") {selected} else {}>24</option>
+                        <option value="25" @if(dd=="25") {selected} else {}>25</option>
+                        <option value="26" @if(dd=="26") {selected} else {}>26</option>
+                        <option value="27" @if(dd=="27") {selected} else {}>27</option>
+                        <option value="28" @if(dd=="28") {selected} else {}>28</option>
+                        <option value="29" @if(dd=="29") {selected} else {}>29</option>
+                        <option value="30" @if(dd=="30") {selected} else {}>30</option>
+                        <option value="31" @if(dd=="31") {selected} else {}>31</option>
+                    </select>
                 </li>
+				<fieldset>
                 <li data-role="fieldcontain">
                     <label for="address">住所</label>
   					<input type="text" name="address" id="address" value="@address" placeholder="住所"/><br/>

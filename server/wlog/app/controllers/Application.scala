@@ -87,11 +87,16 @@ object Application extends Controller {
 
 	val userinfo = UserInfoTable.findByUserId(userid).head
 
-	val df = new SimpleDateFormat("yyyy/MM/dd");  
-	val s_birthday= df.format(userinfo.birthday);  
+	val yyyyf = new SimpleDateFormat("yyyy");  
+	val mmf = new SimpleDateFormat("MM");  
+	val ddf = new SimpleDateFormat("dd");  
+
+	val s_yyyy= yyyyf.format(userinfo.birthday);  
+	val s_mm  = mmf.format(userinfo.birthday);  
+	val s_dd  = ddf.format(userinfo.birthday);  
   
 
-    Ok(views.html.editProfile(userinfo.userid, userinfo.name, userinfo.sex, userinfo.mailAddress, s_birthday, userinfo.address, userinfo.height.toString, userinfo.targetWeight.toString))
+    Ok(views.html.editProfile(userinfo.userid, userinfo.name, userinfo.sex, userinfo.mailAddress, s_yyyy, s_mm, s_dd, userinfo.address, userinfo.height.toString, userinfo.targetWeight.toString))
   }
 
   def applyProfile = Action { implicit request =>
@@ -102,25 +107,25 @@ object Application extends Controller {
 	    "name" -> text,
 	    "sex" -> text,
 	    "mail_address" -> text,
-	    "birthday" -> text,
+	    "birthday_yyyy" -> text,
+	    "birthday_mm" -> text,
+	    "birthday_dd" -> text,
 	    "address" -> text,
 	    "height" -> text,
 	    "target_weight" -> text
 	  )
 	)
 
-	val (userid, name, sex, mail_address, birthday, address, height, target_weight) = loginForm.bindFromRequest.get
+	val (userid, name, sex, mail_address, birthday_yyyy, birthday_mm, birthday_dd, address, height, target_weight) = loginForm.bindFromRequest.get
 
-	println("sex:" + sex)
-
-	val format = new SimpleDateFormat("yyyy/MM/dd");
-    val parsed = format.parse(birthday);
-    val date = new java.sql.Date(parsed.getTime());
+	val format = new SimpleDateFormat("yyyy/MM/dd")
+    val parsed = format.parse(birthday_yyyy + "/" + birthday_mm + "/" +birthday_dd)
+    val date = new java.sql.Date(parsed.getTime())
 
 	val userinfo = new UserInfo(userid, name, sex, mail_address, date, address, height.toDouble, target_weight.toDouble)
 	UserInfoTable.save(userinfo)
 
-    Ok(views.html.applyProfile(userid, name, sex, mail_address, birthday, address, height, target_weight))
+    Ok(views.html.applyProfile(userid, name, sex, mail_address, birthday_yyyy, birthday_mm, birthday_dd, address, height, target_weight))
   }
 
   def displayMenu(userid: String) = Action { implicit request =>

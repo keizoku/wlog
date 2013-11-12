@@ -1,4 +1,4 @@
-@(userid: String, name :String, sex: String, mailAddress: String, birthday: String, address: String, height: String, targetWeight: String)
+@(userid: String, name :String, sex: String, mailAddress: String, yyyy: String, mm: String, dd: String, address: String, height: String, targetWeight: String)
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +28,7 @@
                     <label for="mail_address">メールアドレス: </label>@mailAddress
                 </li>
                 <li data-role="fieldcontain">
-                    <label for="birthday">生年月日: </label>@birthday
+                    <label for="birthday">生年月日: </label>@yyyy年@mm月@dd日
                 </li>
                 <li data-role="fieldcontain">
                     <label for="address">住所: </label>@address
